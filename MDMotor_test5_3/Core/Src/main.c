@@ -53,6 +53,7 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
+// asdfasdf
 uint8_t TxBuffer[] = "\n\rUART Example 1 (Transmission Success !! )\n\r\n\r";
 uint8_t RxBuffer[RxBufferSize];
 
@@ -276,6 +277,7 @@ int main(void)
 	  printf("Revolutions per Minute: %d \n", m1_rpm);
 	  printf("\n");*/
 
+	  printf("Time: %d \n", count_sec);
 	  printf("Hall: %d \n", m1_hall);
 	  printf("Degree: %d.%d \n", m1_deg, m1_deg_1_10);
 	  printf("Revolutions: %d \n", m1_rev);
@@ -283,7 +285,7 @@ int main(void)
 	  printf("\n");
 
 
-	  HAL_Delay(500);
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -665,6 +667,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
 		{
 			m1_hall = m1_hall + 1;
+
+			/*
 			m1_deg_10 = m1_hall * 15;
 			m1_deg = m1_deg_10 / 10;
 			m1_deg_1_10 = m1_deg_10 % 10;
@@ -672,7 +676,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 			m1_rpm = (m1_deg_10 - m1_deg_10_p) * 60 / (1 * 10);
 
 			m1_deg_10_p = m1_deg_10;
-
+*/
 
 
 			if(m1_hall==240)
@@ -716,6 +720,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		m1_deg = m1_deg_10 / 10;
 
 		m1_rpm = m1_deg_10 * 60 / 10;*/
+
+		m1_deg_10 = m1_hall * 15;	// Multiply by 10 to leave the first decimal place.
+		m1_deg = m1_deg_10 / 10;	// Degree's Integer part
+		m1_deg_1_10 = m1_deg_10 % 10;	// Degree's Decimal part
+
+		if(m1_deg_10<m1_deg_10_p)	m1_deg_10_p = m1_deg_10_p - 360;
+
+		m1_rpm = (m1_deg_10 - m1_deg_10_p) * 6 / (1 * 10);
+
+
+
+		m1_deg_10_p = m1_deg_10;
 
 
 
