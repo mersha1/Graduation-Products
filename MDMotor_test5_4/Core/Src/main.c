@@ -272,7 +272,7 @@ int main(void)
 
 
 
-/*	  printf("Degree: %d \n", m1_deg);
+/*	  printf("Degree: %d \n", m1_deg); // 테스트용
 	  printf("Revolutions: %d \n", m1_rev);
 	  printf("Revolutions per Minute: %d \n", m1_rpm);
 	  printf("\n");*/
