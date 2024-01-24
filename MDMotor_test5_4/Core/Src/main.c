@@ -721,7 +721,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 		m1_rpm = m1_deg_10 * 60 / 10;*/
 
-		m1_deg_10 = m1_hall * 15;	// Multiply by 10 to leave the first decimal place.
+/*		m1_deg_10 = m1_hall * 15;	// Multiply by 10 to leave the first decimal place.
+		m1_deg = m1_deg_10 / 10;	// Degree's Integer part
+		m1_deg_1_10 = m1_deg_10 % 10;	// Degree's Decimal part
+
+		if(m1_deg_10<m1_deg_10_p)	m1_deg_10_p = m1_deg_10_p - 360;
+
+		m1_rpm = (m1_deg_10 - m1_deg_10_p) / (6 * 1 * 10);
+
+
+
+		m1_deg_10_p = m1_deg_10;*/
+		m1_deg_10 = m1_hall * 300;	// Multiply by 10 to leave the first decimal place.
 		m1_deg = m1_deg_10 / 10;	// Degree's Integer part
 		m1_deg_1_10 = m1_deg_10 % 10;	// Degree's Decimal part
 
